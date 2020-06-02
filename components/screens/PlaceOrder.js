@@ -42,7 +42,7 @@ class PlaceOrder extends Component {
         if(u.selectedQuantati > 0)
         {
           
-            totalamt = totalamt + parseFloat(u.DishPrice);
+            totalamt = totalamt + parseFloat(u.DishPrice) * parseInt(u.selectedQuantati);
          
         }
       })

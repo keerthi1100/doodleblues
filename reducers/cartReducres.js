@@ -187,23 +187,12 @@ const cartreducers = (state = initialState, action) => {
   }
   if (action.type === 'SUB_QUANTITY') {
     let addedItem = state.dishList.find(item => item.DishID === action.payload.DishID);
-    //if the qt == 0 then it should be removed
-    if (addedItem.selectedQuantati === 1) {
-      let new_items = state.addedItems.filter(item => item.DishID !== action.payload.DishID);
-      let newTotal = state.totalAmt - addedItem.DishPrice;
-      return {
-        ...state,
-        dishList: new_items,
-        total: newTotal,
-      };
-    } else {
-      addedItem.quantity -= 1;
-      let newTotal = state.totalAmt - addedItem.DishPrice;
-      return {
-        ...state,
-        total: newTotal,
-      };
-    }
+    addedItem.selectedQuantati -= 1;
+    let newTotal = state.totalAmt + addedItem.DishPrice;
+    return {
+      ...state,
+      totalAmt: newTotal,
+    };
   }
   if (action.type === 'ADD_FINAL_CART') {
       console.log(action.payload.finalDishList)
